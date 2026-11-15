@@ -26,7 +26,11 @@
     "ignoreDeprecations": "6.0",
 
     "paths": {
-      "@/*": ["./src/*", "vite-env.d.ts"]
+      "@/*": ["./src/*", "vite-env.d.ts"],
+      "@src/*": ["src/*"],
+      "@styles/*": ["styles/*"],
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["pages/*"]
     }
   },
   "include": ["src", "vite-env.d.ts"]
