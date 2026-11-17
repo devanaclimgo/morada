@@ -1,10 +1,10 @@
-import type { RoomyState, Task, Bill, ShoppingItem } from './store';
+import type { MoradaState, Task, Bill, ShoppingItem } from './store';
 
 export type Ctx = {
-  state: RoomyState;
+  state: MoradaState;
   ready: boolean;
   memberName: (id: string | null) => string;
-  update: (patch: Partial<RoomyState>) => void;
+  update: (patch: Partial<MoradaState>) => void;
   toggleTask: (id: string) => void;
   addTask: (t: Omit<Task, 'id' | 'done'>) => void;
   removeTask: (id: string) => void;

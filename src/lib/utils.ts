@@ -72,10 +72,10 @@ export function dueLabel(s: string) {
   return `Vence em ${n} dias`;
 }
 
-export const RoomyCtx = createContext<Ctx | null>(null);
+export const MoradaCtx = createContext<Ctx | null>(null);
 
-export function useRoomy() {
-  const ctx = useContext(RoomyCtx);
-  if (!ctx) throw new Error('useRoomy precisa estar dentro de RoomyProvider');
+export function useMorada() {
+  const ctx = useContext(MoradaCtx);
+  if (!ctx) throw new Error('useMorada precisa estar dentro de MoradaProvider');
   return ctx;
 }

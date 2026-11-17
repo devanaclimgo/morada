@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
-import { shiftDays, iso, today, RoomyCtx } from './utils';
+import { shiftDays, iso, today, MoradaCtx } from './utils';
 import type { Ctx } from './types';
 
 export type LivingMode = 'roommates' | 'solo';
@@ -45,7 +45,7 @@ export type Profile = {
   avatar: string | null;
 };
 
-export type RoomyState = {
+export type MoradaState = {
   onboarded: boolean;
   mode: LivingMode;
   profile: Profile;
@@ -66,7 +66,7 @@ const MEMBERS: Member[] = [
   { id: 'm3', name: 'João' },
 ];
 
-function seed(): RoomyState {
+function seed(): MoradaState {
   let seq = 0;
   const uid = () => `seed-${++seq}`;
   return {
@@ -199,17 +199,17 @@ function seed(): RoomyState {
   };
 }
 
-const KEY = 'roomy.state.v1';
+const KEY = 'morada.state.v1';
 
-export function RoomyProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<RoomyState>(() => seed());
+export function MoradaProvider({ children }: { children: ReactNode }) {
+  const [state, setState] = useState<MoradaState>(() => seed());
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     try {
       const raw = localStorage.getItem(KEY);
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      if (raw) setState({ ...seed(), ...(JSON.parse(raw) as RoomyState) });
+      if (raw) setState({ ...seed(), ...(JSON.parse(raw) as MoradaState) });
     } catch {
       /* ignora dados inválidos */
     }
@@ -221,7 +221,7 @@ export function RoomyProvider({ children }: { children: ReactNode }) {
   }, [state, ready]);
 
   const value = useMemo<Ctx>(() => {
-    const update = (patch: Partial<RoomyState>) =>
+    const update = (patch: Partial<MoradaState>) =>
       setState((s) => ({ ...s, ...patch }));
 
     return {
@@ -318,5 +318,5 @@ export function RoomyProvider({ children }: { children: ReactNode }) {
     };
   }, [state, ready]);
 
-  return <RoomyCtx.Provider value={value}>{children}</RoomyCtx.Provider>;
+  return <MoradaCtx.Provider value={value}>{children}</MoradaCtx.Provider>;
 }
